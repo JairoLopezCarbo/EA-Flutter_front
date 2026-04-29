@@ -71,6 +71,21 @@ class TaskDetailScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 8),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                    decoration: BoxDecoration(
+                      color: Colors.blueAccent.withOpacity(0.12),
+                      borderRadius: BorderRadius.circular(999),
+                    ),
+                    child: Text(
+                      task.estado,
+                      style: const TextStyle(
+                        color: Colors.blueAccent,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 8),
                   Text(
                     'ID: ${task.id}',
                     style: TextStyle(color: Colors.grey[500], fontSize: 12),

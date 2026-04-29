@@ -74,6 +74,7 @@ class OrganizationService {
           'fechaInicio': fechaInicio.toUtc().toIso8601String(),
           'fechaFin': fechaFin.toUtc().toIso8601String(),
           'usuarios': usuarios,
+          'estado': 'to do',
         }),
       );
 
@@ -84,6 +85,32 @@ class OrganizationService {
       throw Exception('Error al crear tarea: ${response.statusCode} - ${response.body}');
     } catch (e) {
       throw Exception('No se pudo crear la tarea. Error: $e');
+    }
+  }
+
+  Future<void> updateTaskState({
+    required String organizacionId,
+    required String tareaId,
+    required String estado,
+  }) async {
+    try {
+      final response = await http.patch(
+        Uri.parse('${AppConstants.baseUrl}/organizaciones/$organizacionId/tareas/$tareaId/estado'),
+        headers: <String, String>{
+          'Content-Type': 'application/json',
+        },
+        body: json.encode(<String, dynamic>{
+          'estado': estado,
+        }),
+      );
+
+      if (response.statusCode == 200) {
+        return;
+      }
+
+      throw Exception('Error al actualizar la tarea: ${response.statusCode} - ${response.body}');
+    } catch (e) {
+      throw Exception('No se pudo actualizar el estado de la tarea. Error: $e');
     }
   }
 }

@@ -3,6 +3,7 @@ import 'organization.dart';
 class Task {
   final String id;
   final String titulo;
+  final String estado;
   final DateTime fechaInicio;
   final DateTime fechaFin;
   final List<OrganizationUser> usuarios;
@@ -10,6 +11,7 @@ class Task {
   Task({
     required this.id,
     required this.titulo,
+    required this.estado,
     required this.fechaInicio,
     required this.fechaFin,
     required this.usuarios,
@@ -23,6 +25,7 @@ class Task {
     return Task(
       id: id,
       titulo: titulo,
+      estado: (json['estado'] ?? 'to do').toString(),
       fechaInicio: _parseDate(json['fechaInicio'] ?? json['fecha_inicio']),
       fechaFin: _parseDate(json['fechaFin'] ?? json['fecha_fin']),
       usuarios: (json['usuarios'] as List<dynamic>?)
